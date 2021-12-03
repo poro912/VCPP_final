@@ -3,9 +3,13 @@
 
 class Dodge : PAGE
 {
+private:
+	PLAYER * player;
+
 public:
 	Dodge();
 	~Dodge();
+	
 
 	int proc(
 		HWND		hWnd,
@@ -18,12 +22,7 @@ public:
 	void paint(
 		HDC			hdc
 	);
-
-
-
 };
-
-
 
 
 

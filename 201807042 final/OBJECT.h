@@ -7,6 +7,7 @@
 class OBJECT
 {
 protected:
+	RECT			rect	= { 0, };
 	int				x		= 0;
 	int				y		= 0;
 	int				width	= 0;
@@ -22,12 +23,15 @@ public:
 		const int&		width,
 		const int&		height
 	);
-	
+
 	OBJECT(
 		const int&		x,
 		const int&		y,
 		const int&		width,
 		const int&		height
+	);
+	OBJECT(
+		const RECT&		rect
 	);
 
 	void SetPen(const COLORREF& col);

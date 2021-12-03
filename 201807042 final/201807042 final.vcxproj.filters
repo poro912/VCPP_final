@@ -57,6 +57,9 @@
     <ClInclude Include="BUTTON.h">
       <Filter>소스 파일\moudle</Filter>
     </ClInclude>
+    <ClInclude Include="PLAYER.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201807042 final.cpp">
@@ -74,6 +77,9 @@
     <ClCompile Include="LABEL.cpp">
       <Filter>소스 파일\moudle</Filter>
     </ClCompile>
+    <ClCompile Include="PLAYER.cpp">
+      <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="201807042 final.rc">
@@ -87,8 +93,5 @@
     <Image Include="201807042 final.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

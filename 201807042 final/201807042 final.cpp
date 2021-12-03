@@ -129,6 +129,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	static int page = 0;
 	static LABEL* lbl1;
 	static BUTTON* btn;
+	static Dodge* dot;
+	int ret = 0;
+
+	if (dot != NULL) {
+		ret = dot->proc(hWnd, message, wParam, lParam);
+	}
 
 	switch (message)
 	{
@@ -153,7 +159,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_TIMER:
 		switch (wParam)
 		{
-		case 0:
+		case FRAME_TIMER:
 			InvalidateRect(hWnd, NULL, true);
 		default:
 			break;
@@ -162,11 +168,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡPAINT, COMMAND, DESTROYㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	case WM_CREATE:
 	{
-		SetTimer(hWnd,0,1000/30,NULL);   // 30 fps
+		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
 		lbl1 = new LABEL(100, 200, L"hello",20);
 		btn = new BUTTON(L"test",1,200, 300, 100, 200);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn->setAction(buttontest);
+
+		dot = new Dodge();
 	}
 		break;
 	case WM_PAINT:
@@ -175,7 +183,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		HDC hdc = BeginPaint(hWnd, &ps);  
 
 		lbl1->paint(hdc);
-		btn->paint(hdc);
+		//btn->paint(hdc);
 
 		EndPaint(hWnd, &ps);
 	}
@@ -193,7 +201,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			DestroyWindow(hWnd);
 			break;
 		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
+			if(ret == 0)
+				return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 	}
 		break;
@@ -203,8 +212,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+		if(ret == 0)
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		break;
 	}
+
+
 	return 0;
 }
 

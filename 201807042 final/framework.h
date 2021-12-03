@@ -18,3 +18,4 @@
 // 만들어놓은 모듈
 #include "BUTTON.h"
 #include "LABEL.h"
+#include "PLAYER.h"

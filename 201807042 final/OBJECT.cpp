@@ -10,6 +10,7 @@ void OBJECT::init(
 	this->y = y;
 	this->width = width;
 	this->height = height;
+	this->rect = { x, y, x + width, y + height };
 }
 
 OBJECT::OBJECT(
@@ -19,6 +20,11 @@ OBJECT::OBJECT(
 	const int&		height
 ) {
 	this->init(x, y, width, height);
+}
+OBJECT::OBJECT(
+	const RECT&		rect
+) {
+	this->init(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 }
 
 
