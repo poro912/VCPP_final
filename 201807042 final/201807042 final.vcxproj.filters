@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\gmae_2">
+      <UniqueIdentifier>{bd132074-9150-4705-b576-98ca9ed4ea6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\moudle">
+      <UniqueIdentifier>{3bd5af56-5304-4e79-9c78-19ea4e0d60e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\moudle">
+      <UniqueIdentifier>{ed89e782-0eba-4528-88a8-6d715e574fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Dodge">
+      <UniqueIdentifier>{2322a9e5-6023-4428-8c1a-b7c070f2d559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\MineSerch">
+      <UniqueIdentifier>{28f5ccf5-30e9-4b78-9e89-ab52a63a217e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="201807042 final.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Dodge.h">
+      <Filter>소스 파일\Dodge</Filter>
+    </ClInclude>
+    <ClInclude Include="PAGE.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
+    <ClInclude Include="LABEL.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
+    <ClInclude Include="BUTTON.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="201807042 final.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BUTTON.cpp">
+      <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT.cpp">
+      <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
+    <ClCompile Include="Dodge.cpp">
+      <Filter>소스 파일\Dodge</Filter>
+    </ClCompile>
+    <ClCompile Include="LABEL.cpp">
+      <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="201807042 final.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="201807042 final.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>
