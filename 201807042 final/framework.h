@@ -20,3 +20,4 @@
 #include "BUTTON.h"
 #include "LABEL.h"
 #include "PLAYER.h"
+#include "TEXTBUTTON.h"

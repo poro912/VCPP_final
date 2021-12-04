@@ -37,7 +37,7 @@ void LABEL::paint(HDC hdc)
 	npen = CreatePen(PS_SOLID, 2, this->pen);
 	nbrush = CreateSolidBrush(this->brush);
 	nfont = CreateFont(this->font_size, 0, 0, 0, FW_BOLD, 0, 0, 0, HANGEUL_CHARSET,
-		0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("±¼¸²"));
+		0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("D2Coding"));
 
 	open = (HPEN)SelectObject(hdc, npen);
 	obrush = (HBRUSH)SelectObject(hdc, nbrush);

@@ -112,11 +112,6 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	return (INT_PTR)FALSE;
 }
 
-/*
-MessageBox(hWnd, L"실패", L"파일 저장 실패", MB_OK);
-
-*/
-
 int buttontest(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	MessageBox(hWnd, L"test 성공", L"test", NULL);
@@ -130,10 +125,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	static int page = 0;
 	static LABEL* lbl1;
-	static BUTTON* btn;
+	static TEXTBUTTON* btn;
 	static Dodge* dot;
 	int ret = 0;
-
+		
 	if (dot != NULL) {
 		ret = dot->proc(hWnd, message, wParam, lParam);
 	}
@@ -183,7 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
 		lbl1 = new LABEL(100, 200, L"hello",20);
-		btn = new BUTTON(L"test",1,200, 300, 100, 200);
+		btn = new TEXTBUTTON(L"test", 1, 200, 300, 100, 200, 20);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn->setAction(buttontest);
 		
@@ -228,8 +223,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		break;
 	}
-
-
 	return 0;
 }
 

@@ -22,11 +22,14 @@ Dodge::Dodge()
 	this->enduring_time = 0;
 	this->btn_start = new BUTTON(L"START", START_BUTTON, 100, 200, 200, 100);
 	this->btn_start->setAction(start_button);
+	this->time_label = new LABEL(100, 50, L"0.00 초", 20);
+	this->bullet_label = NULL;
 }
 
 Dodge::~Dodge()
 {
-
+	delete this->player;
+	delete this->btn_start;
 }
 
 int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -44,6 +47,7 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		SetTimer(hWnd, CHECK_TIME, 50, NULL);
 		btn_start->setEnabled(false);
 		btn_start->setVisible(false);
+		this->player->setLocation(300, 300);
 		break;
 
 	case WM_GAME_OVER:
@@ -91,8 +95,13 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PostMessage(hWnd, WM_KEYBOARD, 0, 0);
 			break;
 		case CHECK_TIME:
-			this->enduring_time = start_time - GetTickCount64();
+		{
+			WCHAR temp[50];
+			this->enduring_time = (GetTickCount64() - this->start_time) / 10;
+			wsprintf(temp, L"%d.%d 초", (int)(this->enduring_time / 100), (int)(this->enduring_time % 100));
+			this->time_label->setText(temp);
 			break;
+		}
 		default:
 			break;
 		}
@@ -117,11 +126,14 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
 
+
 		// 게임 영역 출력
 		Rectangle(hdc, this->area.left, this->area.top, this->area.right, this->area.bottom);
 
 		btn_start->paint(hdc);
 		this->player->paint(hdc);
+		this->time_label->paint(hdc);
+
 		EndPaint(hWnd, &ps);
 		break;
 	}

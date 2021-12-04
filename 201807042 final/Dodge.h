@@ -9,6 +9,8 @@ private:
 	ULONGLONG start_time;
 	ULONGLONG enduring_time;
 	BUTTON * btn_start;
+	LABEL* time_label;
+	LABEL* bullet_label;
 
 public:
 	Dodge();

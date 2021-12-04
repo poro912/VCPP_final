@@ -81,3 +81,10 @@ int PLAYER::if_move_down()
 {
 	return this->rect.bottom + this->speed;
 }
+
+void PLAYER::setLocation(const int x, const int y)
+{
+	this->x = x;
+	this->y = y;
+	this->rect = { this->x,this->y,this->x + this->width, this->y + this->height };
+}

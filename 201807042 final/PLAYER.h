@@ -37,4 +37,6 @@ public:
 	int if_move_up();
 	int if_move_down();
 
+	void setLocation(const int x, const int y);
+
 };
