@@ -120,7 +120,9 @@ MessageBox(hWnd, L"실패", L"파일 저장 실패", MB_OK);
 int buttontest(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	MessageBox(hWnd, L"test 성공", L"test", NULL);
-	return 0;
+	PostMessage(hWnd, WM_GAME_CREATE, 0, 0);
+	//PostMessage(hWnd, WM_GAME_START, 0, 0);
+	return 1;
 }
 
 
@@ -138,22 +140,33 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	switch (message)
 	{
+	case WM_GAME_CREATE:
+		if (dot == NULL) {
+			dot = new Dodge();
+		}
+		else
+		{
+			delete dot;
+			dot = new Dodge();
+		}
+		
 	case WM_LBUTTONDOWN:
 		break;
 
 	case WM_MOUSEMOVE:
 		break;
 	case WM_LBUTTONUP:
-		btn->press_Action(hWnd, message, wParam, lParam);
-
+		if (btn->press_Action(hWnd, message, wParam, lParam))
+		{
+			btn->setEnabled(false);
+			btn->setVisible(false);
+		}
 		break;
 	case WM_CHAR:
 		PostMessage(hWnd, WM_USER + 10, wParam, 0);
 	
 		break;
 
-	case WM_USER+10:
-		break;
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡTimerㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	case WM_TIMER:
@@ -173,8 +186,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		btn = new BUTTON(L"test",1,200, 300, 100, 200);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn->setAction(buttontest);
-
-		dot = new Dodge();
+		
 	}
 		break;
 	case WM_PAINT:
@@ -183,7 +195,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		HDC hdc = BeginPaint(hWnd, &ps);  
 
 		lbl1->paint(hdc);
-		//btn->paint(hdc);
+		btn->paint(hdc);
 
 		EndPaint(hWnd, &ps);
 	}

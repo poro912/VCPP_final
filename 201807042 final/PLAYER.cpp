@@ -38,7 +38,7 @@ void PLAYER::move_right()
 {
 	this->x += speed;
 	this->rect.left += speed;
-	this->rect.right -= speed;
+	this->rect.right += speed;
 }
 void PLAYER::move_up()
 {
@@ -49,8 +49,8 @@ void PLAYER::move_up()
 void PLAYER::move_down()
 {
 	this->y += speed;
-	this->rect.top -= speed;
-	this->rect.bottom -= speed;
+	this->rect.top += speed;
+	this->rect.bottom += speed;
 }
 
 void PLAYER::setSpeed(const int& speed)
@@ -62,7 +62,22 @@ int	PLAYER::getSpeed()
 	return this->speed;
 }
 
-void PLAYER::paint(HDC hdc)
+int PLAYER::if_move_left()
 {
-	BUTTON::paint(hdc);
+	return this->rect.left - this->speed;
+}
+
+int PLAYER::if_move_right()
+{
+	return this->rect.right + this->speed;
+}
+
+int PLAYER::if_move_up()
+{
+	return this->rect.top - this->speed;
+}
+
+int PLAYER::if_move_down()
+{
+	return this->rect.bottom + this->speed;
 }

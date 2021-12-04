@@ -13,7 +13,8 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
+#include <vector>
+#include <ctime>
 
 // 만들어놓은 모듈
 #include "BUTTON.h"

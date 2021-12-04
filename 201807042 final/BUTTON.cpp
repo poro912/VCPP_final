@@ -36,6 +36,8 @@ BUTTON::BUTTON(
 
 void BUTTON::paint(const HWND&		hWnd)
 {
+	if (!this->visible)
+		return;
 	HDC hdc = GetDC(hWnd);
 	paint(hdc);
 	ReleaseDC(hWnd, hdc);
@@ -43,6 +45,8 @@ void BUTTON::paint(const HWND&		hWnd)
 
 void BUTTON::paint(HDC&			hdc)
 {
+	if (!this->visible)
+		return;
 	HPEN open, npen;
 	HBRUSH obrush, nbrush;
 	npen = CreatePen(PS_SOLID, 1, this->pen);
@@ -97,7 +101,8 @@ int BUTTON::Action(
 	const	WPARAM&		wParam,
 	const	LPARAM&		lParam
 ) {
-	return action(hWnd, message, lParam, wParam);
+	if(this->enabled)
+		return action(hWnd, message, lParam, wParam);
 }
 
 int BUTTON::press_Action(
@@ -106,8 +111,10 @@ int BUTTON::press_Action(
 	const	WPARAM& wParam,
 	const	LPARAM& lParam
 ) {
-	if(this->press(lParam))
+	if (this->press(lParam))
 		return action(hWnd, message, lParam, wParam);
+	else
+		return 0;
 }
 
 

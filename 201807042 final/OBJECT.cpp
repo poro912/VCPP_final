@@ -47,3 +47,24 @@ void OBJECT::setEnabled(const bool&			enabled)
 	this->enabled = enabled;
 }
 
+
+int OBJECT::get_left()
+{
+	return this->rect.left;
+}
+int OBJECT::get_top()
+{
+	return this->rect.top;
+}
+int OBJECT::get_right() 
+{
+	return this->rect.right;
+}
+int OBJECT::get_bottom() 
+{
+	return this->rect.bottom;
+}
+RECT OBJECT::get_rect() 
+{
+	return this->rect;
+}

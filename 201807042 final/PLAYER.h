@@ -1,6 +1,6 @@
 #pragma once
 #include "BUTTON.h"
-class PLAYER : BUTTON
+class PLAYER : public BUTTON
 {
 private:
 	int		speed = 10;
@@ -29,9 +29,12 @@ public:
 	void move_up();
 	void move_down();
 
-	void paint(HDC hdc);
-
 	void setSpeed(const int& speed);
 	int	getSpeed();
+
+	int if_move_left();
+	int if_move_right();
+	int if_move_up();
+	int if_move_down();
 
 };

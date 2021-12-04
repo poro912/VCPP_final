@@ -5,6 +5,10 @@ class Dodge : PAGE
 {
 private:
 	PLAYER * player;
+	RECT area;
+	ULONGLONG start_time;
+	ULONGLONG enduring_time;
+	BUTTON * btn_start;
 
 public:
 	Dodge();
@@ -22,9 +26,16 @@ public:
 	void paint(
 		HDC			hdc
 	);
+
+	
 };
 
 
-
+int start_button(
+	HWND hWnd, 
+	UINT message, 
+	WPARAM wParam, 
+	LPARAM lParam
+);
 
 

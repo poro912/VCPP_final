@@ -42,5 +42,12 @@ public:
 
 	void setEnabled(const bool& enabled);
 
+	int get_left();
+	int get_top();
+	int get_right();
+	int get_bottom();
+	RECT get_rect();
+
+
 };
 
