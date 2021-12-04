@@ -12,7 +12,7 @@ TEXTBUTTON::TEXTBUTTON(
 ) : BUTTON(name, code, x, y, width, height), LABEL(x, y, name, font_size)
 {
 	TEXTBUTTON::LABEL::setLocation(x + (width / 2) - (lstrlenW(name) / 3 * font_size),
-		y + (height / 4) - (font_size / 2));
+		y + (height / 2) - (font_size / 2));
 }
 
 

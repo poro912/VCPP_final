@@ -31,6 +31,8 @@ void LABEL::paint(const HWND hWnd)
 
 void LABEL::paint(HDC hdc)
 {
+	if (!this->visible)
+		return;
 	HFONT ofont, nfont;
 	HPEN open, npen;
 	HBRUSH obrush, nbrush;

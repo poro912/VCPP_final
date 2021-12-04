@@ -20,10 +20,11 @@ Dodge::Dodge()
 	this->player = new PLAYER(300,300,5);
 	this->start_time = 0;
 	this->enduring_time = 0;
-	this->btn_start = new BUTTON(L"START", START_BUTTON, 100, 200, 200, 100);
+	this->btn_start = new TEXTBUTTON(L"START", START_BUTTON, 250, 250, 100, 50, 20);
 	this->btn_start->setAction(start_button);
 	this->time_label = new LABEL(100, 50, L"0.00 蟾", 20);
 	this->bullet_label = NULL;
+	this->running = false;
 }
 
 Dodge::~Dodge()
@@ -37,9 +38,10 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_GAME_CREATE:
-
+		
 		break;
 	case WM_GAME_START:
+		this->running = true;
 		this->start_time = GetTickCount64();
 		this->enduring_time = start_time - GetTickCount64();
 		KillTimer(hWnd, KEY_SENSE);
@@ -59,6 +61,8 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_KEYBOARD:
+		if (!this->running)
+			SendMessage(hWnd, WM_GAME_START, 0, 0);
 		if (GetKeyState('A') & 0x8000 || GetKeyState(VK_LEFT) & 0x8000)
 		{
 			if(this->area.left <= player->if_move_left())
@@ -87,11 +91,15 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		btn_start->press_Action(hWnd, message, wParam, lParam);
 		break;
 
+	case WM_KEYDOWN:
+		if(!this->running)
+			PostMessage(hWnd, WM_GAME_START, 0, 0);
+
 		// 天天天天天天天天天天天天天天天天天天天天天天天天Timer天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天
 	case WM_TIMER:
 		switch (wParam)
 		{
-		case KEY_SENSE: //frame
+		case KEY_SENSE: //frameq
 			PostMessage(hWnd, WM_KEYBOARD, 0, 0);
 			break;
 		case CHECK_TIME:

@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 여기에 코드를 입력합니다.
-
+	srand(time(NULL));
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_MY201807042FINAL, szWindowClass, MAX_LOADSTRING);
@@ -144,7 +144,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			delete dot;
 			dot = new Dodge();
 		}
-		
+		break; 
 	case WM_LBUTTONDOWN:
 		break;
 
@@ -178,7 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
 		lbl1 = new LABEL(100, 200, L"hello",20);
-		btn = new TEXTBUTTON(L"test", 1, 200, 300, 100, 200, 20);
+		btn = new TEXTBUTTON(L"test", 1, 200, 300, 100, 50, 30);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn->setAction(buttontest);
 		

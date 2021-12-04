@@ -8,9 +8,10 @@ private:
 	RECT area;
 	ULONGLONG start_time;
 	ULONGLONG enduring_time;
-	BUTTON * btn_start;
+	TEXTBUTTON * btn_start;
 	LABEL* time_label;
 	LABEL* bullet_label;
+	bool running;
 
 public:
 	Dodge();

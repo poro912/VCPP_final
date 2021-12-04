@@ -18,7 +18,7 @@ BUTTON::BUTTON(
 	const	int&		y,
 	const	int&		width,
 	const	int&		height
-) : OBJECT(x, y, width, width) {
+) : OBJECT(x, y, width, height) {
 	init_name(name);
 	init_code(code);
 }
