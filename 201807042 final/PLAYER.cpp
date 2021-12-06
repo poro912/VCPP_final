@@ -4,7 +4,7 @@ PLAYER::PLAYER(
 	const int& x,
 	const int& y,
 	const int& speed
-) : BUTTON(L"PLAYER", 0, x, y, 20, 20)
+) : BUTTON(L"PLAYER", 0, x, y, 10, 10)
 {
 	this->speed = speed;
 }

@@ -42,6 +42,15 @@ public:
 
 	void setEnabled(const bool& enabled);
 
+	void setLocation(
+		const int x,
+		const int y
+	);
+	void moveHorizontal(const int n);
+
+	void moveVertical(const int n);
+
+
 	int get_left();
 	int get_top();
 	int get_right();

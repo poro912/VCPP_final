@@ -47,6 +47,29 @@ void OBJECT::setEnabled(const bool&			enabled)
 	this->enabled = enabled;
 }
 
+void OBJECT::setLocation(
+	const int x,
+	const int y
+) {
+	this->x = x;
+	this->y = y;
+	this->rect = { x,y,x + this->width,y + this->height };
+}
+
+void OBJECT::moveHorizontal(const int n)
+{
+	this->x += n;
+	this->rect.left += n;
+	this->rect.right += n;
+}
+void OBJECT::moveVertical(const int n)
+{
+	this->y += n;
+	this->rect.top += n;
+	this->rect.bottom += n;
+}
+
+
 
 int OBJECT::get_left()
 {

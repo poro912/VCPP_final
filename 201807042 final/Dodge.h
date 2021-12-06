@@ -8,10 +8,16 @@ private:
 	RECT area;
 	ULONGLONG start_time;
 	ULONGLONG enduring_time;
+	ULONGLONG best_enduring_time;
 	TEXTBUTTON * btn_start;
+	
+	LABEL* TITLE;
 	LABEL* time_label;
 	LABEL* bullet_label;
+	LABEL* best_time;
+	
 	bool running;
+	vector<BULLET> bullets;
 
 public:
 	Dodge();

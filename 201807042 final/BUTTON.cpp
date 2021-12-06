@@ -65,14 +65,22 @@ bool BUTTON::is_area(const LPARAM&		lParam)
 {
 	int		x = LOWORD(lParam);
 	int		y = HIWORD(lParam);
+	/*
+	if (this->x < x && x < this->x + this->width) {
+		if (this->y < y && y < this->y + this->width)
+			return true;
+	}
+	return false;
+	*/
 	do {
-		if (x <= this->x || this->x + this->width <= x)
+		if (x < this->x || this->x + this->width < x)
 			break;
-		if (y <= this->y || this->y + this->width <= y)
+		if (y < this->y || this->y + this->height < y)
 			break;
 		return true;
 	} while (true);
 	return false;
+	
 }
 
 bool BUTTON::press(const LPARAM&		lParam)
@@ -116,6 +124,8 @@ int BUTTON::press_Action(
 	else
 		return 0;
 }
+
+
 
 
 //return action(HWND hWnd, UINT message, LPARAM lParam, WPARAM wParam)

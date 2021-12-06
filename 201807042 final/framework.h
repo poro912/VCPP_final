@@ -21,3 +21,4 @@
 #include "LABEL.h"
 #include "PLAYER.h"
 #include "TEXTBUTTON.h"
+#include "BULLET.h"

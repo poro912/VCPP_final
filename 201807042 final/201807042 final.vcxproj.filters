@@ -63,6 +63,9 @@
     <ClInclude Include="TEXTBUTTON.h">
       <Filter>소스 파일\moudle</Filter>
     </ClInclude>
+    <ClInclude Include="BULLET.h">
+      <Filter>소스 파일\moudle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201807042 final.cpp">
@@ -84,6 +87,9 @@
       <Filter>소스 파일\moudle</Filter>
     </ClCompile>
     <ClCompile Include="TEXTBUTTON.cpp">
+      <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
+    <ClCompile Include="BULLET.cpp">
       <Filter>소스 파일\moudle</Filter>
     </ClCompile>
   </ItemGroup>

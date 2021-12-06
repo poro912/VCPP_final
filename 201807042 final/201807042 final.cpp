@@ -28,7 +28,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_MY201807042FINAL, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
-
 	// 애플리케이션 초기화를 수행합니다:
 	if (!InitInstance (hInstance, nCmdShow))
 	{
@@ -115,7 +114,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 int buttontest(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	MessageBox(hWnd, L"test 성공", L"test", NULL);
-	PostMessage(hWnd, WM_GAME_CREATE, 0, 0);
+	SendMessage(hWnd, WM_GAME_CREATE, 0, 0);
 	//PostMessage(hWnd, WM_GAME_START, 0, 0);
 	return 1;
 }
@@ -125,7 +124,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	static int page = 0;
 	static LABEL* lbl1;
-	static TEXTBUTTON* btn;
+	static TEXTBUTTON* btn_dodge;
+	static TEXTBUTTON* Mine_serch;
 	static Dodge* dot;
 	int ret = 0;
 		
@@ -151,10 +151,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEMOVE:
 		break;
 	case WM_LBUTTONUP:
-		if (btn->press_Action(hWnd, message, wParam, lParam))
+		if (btn_dodge->press_Action(hWnd, message, wParam, lParam))
 		{
-			btn->setEnabled(false);
-			btn->setVisible(false);
+			btn_dodge->setEnabled(false);
+			btn_dodge->setVisible(false);
 		}
 		break;
 	case WM_CHAR:
@@ -178,9 +178,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
 		lbl1 = new LABEL(100, 200, L"hello",20);
-		btn = new TEXTBUTTON(L"test", 1, 200, 300, 100, 50, 30);
+		btn_dodge = new TEXTBUTTON(L"Dodge", 1, 200, 100, 200, 50, 30);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
-		btn->setAction(buttontest);
+		btn_dodge->setAction(buttontest);
 		
 	}
 		break;
@@ -190,7 +190,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		HDC hdc = BeginPaint(hWnd, &ps);  
 
 		lbl1->paint(hdc);
-		btn->paint(hdc);
+		btn_dodge->paint(hdc);
 
 		EndPaint(hWnd, &ps);
 	}

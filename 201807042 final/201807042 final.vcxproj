@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="201807042 final.h" />
+    <ClInclude Include="BULLET.h" />
     <ClInclude Include="BUTTON.h" />
     <ClInclude Include="Dodge.h" />
     <ClInclude Include="framework.h" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201807042 final.cpp" />
+    <ClCompile Include="BULLET.cpp" />
     <ClCompile Include="BUTTON.cpp" />
     <ClCompile Include="Dodge.cpp" />
     <ClCompile Include="LABEL.cpp" />
