@@ -111,10 +111,17 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	return (INT_PTR)FALSE;
 }
 
-int buttontest(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+int create_button(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	MessageBox(hWnd, L"test 성공", L"test", NULL);
+	//MessageBox(hWnd, L"test 성공", L"test", NULL);
 	SendMessage(hWnd, WM_GAME_CREATE, 0, 0);
+	//PostMessage(hWnd, WM_GAME_START, 0, 0);
+	return 1;
+}
+int quit_button(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	//MessageBox(hWnd, L"test 성공", L"test", NULL);
+	SendMessage(hWnd, WM_GAME_OVER, 0, 0);
 	//PostMessage(hWnd, WM_GAME_START, 0, 0);
 	return 1;
 }
@@ -126,6 +133,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	static LABEL* lbl1;
 	static TEXTBUTTON* btn_dodge;
 	static TEXTBUTTON* Mine_serch;
+	static TEXTBUTTON* btn_quit;
 	static Dodge* dot;
 	int ret = 0;
 		
@@ -155,13 +163,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			btn_dodge->setEnabled(false);
 			btn_dodge->setVisible(false);
+			page = 1;
+		}
+		if (btn_quit->press_Action(hWnd, message, wParam, lParam))
+		{
+			delete dot;
+			dot = NULL;
+			btn_dodge->setEnabled(true);
+			btn_dodge->setVisible(true);
+
+			if (page == 0)
+			{
+				PostMessage(hWnd, WM_DESTROY, wParam, 0);
+			}
+			page = 0;
 		}
 		break;
-	case WM_CHAR:
-		PostMessage(hWnd, WM_USER + 10, wParam, 0);
-	
-		break;
-
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡTimerㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	case WM_TIMER:
@@ -177,11 +194,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:
 	{
 		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
-		lbl1 = new LABEL(100, 200, L"hello",20);
-		btn_dodge = new TEXTBUTTON(L"Dodge", 1, 200, 100, 200, 50, 30);
+		lbl1 = new LABEL(250, 50, L"게임 선택",50);
+		btn_dodge = new TEXTBUTTON(L"Dodge", 1, 250, 120, 200, 50, 30);
+		btn_quit = new TEXTBUTTON(L"QUIT", 2, 250, 600, 200, 50, 30);
 		//function<int(HWND,UINT,LPARAM,WPARAM)>
-		btn_dodge->setAction(buttontest);
-		
+		btn_dodge->setAction(create_button);
+		btn_quit->setAction(quit_button);
 	}
 		break;
 	case WM_PAINT:
@@ -189,9 +207,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);  
 
-		lbl1->paint(hdc);
-		btn_dodge->paint(hdc);
-
+		if (page == 0)
+		{
+			btn_dodge->paint(hdc);
+			lbl1->paint(hdc);
+		}
+		
+		
+		btn_quit->paint(hdc);
+		if (dot != NULL)
+			dot->paint(hdc);
 		EndPaint(hWnd, &ps);
 	}
 		break;

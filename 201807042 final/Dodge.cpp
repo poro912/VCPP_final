@@ -45,6 +45,11 @@ Dodge::~Dodge()
 {
 	delete this->player;
 	delete this->btn_start;
+	delete this->TITLE;
+	delete this->time_label;
+	delete this->bullet_label;
+	delete this->best_time;
+	this->bullets.clear();
 }
 
 int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -56,6 +61,7 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_GAME_START:
+
 		this->running = true;
 		this->start_time = GetTickCount64();
 		this->enduring_time = start_time - GetTickCount64();
@@ -82,9 +88,18 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			i.SetBrush(RGB(100, 100, 100));
 			i.SetPen(RGB(100, 100, 100));
 		}
+		this->temp_time = GetTickCount64();
 		break;
 
 	case WM_GAME_OVER:
+	{
+		WCHAR temp[50];
+		if (this->enduring_time > this->best_enduring_time)
+		{
+			this->best_enduring_time = enduring_time;
+			wsprintf(temp, L"최고기록 : %d.%d 초", (int)(this->enduring_time / 100), (int)(this->enduring_time % 100));
+			this->best_time->setText(temp);
+		}
 		//delete this->player;
 		//KillTimer(hWnd, KEY_SENSE);
 		KillTimer(hWnd, CHECK_TIME);
@@ -96,8 +111,10 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		this->player->setVisible(false);
 		this->player->setLocation(300,300);
 		this->running = false;
-
+		this->end_time = GetTickCount64();
+		Sleep(10);
 		break;
+	}
 
 	case WM_KEYBOARD:
 	{
@@ -128,20 +145,25 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			press = true;
 		}
 
-		if (!this->running && press)
-			if(GetTickCount64() - this->start_time + this->enduring_time > 4000)
-			SendMessage(hWnd, WM_GAME_START, 0, 0);
+		if (!this->running && press) {
+			if ((GetTickCount64() - (this->end_time)) > 500)
+				SendMessage(hWnd, WM_GAME_START, 0, 0);
+		}
+		break;
 	}
+
+	case WM_KEYDOWN:
+		if (!this->running) {
+			if ((GetTickCount64() - (this->end_time)) > 500)
+				SendMessage(hWnd, WM_GAME_START, 0, 0);
+		}
 		break;
 
 	case WM_LBUTTONUP:
 		btn_start->press_Action(hWnd, message, wParam, lParam);
 		break;
-
-	case WM_KEYDOWN:
-		if(!this->running)
-			PostMessage(hWnd, WM_GAME_START, 0, 0);
-
+	case WM_KEYUP:
+		break;
 		// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡTimerㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	case WM_TIMER:
 		switch (wParam)
@@ -151,20 +173,20 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case CHECK_TIME:
 		{
-			static ULONGLONG temp_time = GetTickCount64();
+			
 			WCHAR temp[50];
 			this->enduring_time = (GetTickCount64() - this->start_time) / 10;
 			wsprintf(temp, L"%d.%d 초", (int)(this->enduring_time / 100), (int)(this->enduring_time % 100));
 			this->time_label->setText(temp);
 
-			if (GetTickCount64() - temp_time >= 3000)
+			if (GetTickCount64() - this->temp_time >= 2000)
 			{
 				BULLET temp_Bullet(0, 0);
 				temp_Bullet.setAutoLocation(this->area);
 				temp_Bullet.SetBrush(RGB(100, 100, 100));
 				temp_Bullet.SetPen(RGB(100, 100, 100));
 				this->bullets.push_back(temp_Bullet);
-				temp_time = GetTickCount64();
+				this->temp_time = GetTickCount64();
 			}
 
 
@@ -201,14 +223,17 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	
 	case WM_PAINT:
 	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
-		this->paint(hdc);
-		EndPaint(hWnd, &ps);
+		//PAINTSTRUCT ps;
+		//HDC hdc = BeginPaint(hWnd, &ps);
+		//this->paint(hdc);
+		//EndPaint(hWnd, &ps);
 		break;
 	}
 	case WM_DESTROY:
 		SendMessage(hWnd, WM_GAME_OVER, 0, 0);
+		KillTimer(hWnd, KEY_SENSE);
+		KillTimer(hWnd, CHECK_TIME);
+		KillTimer(hWnd, BULLET_proc);
 		break;
 	default:
 		return 0;
@@ -225,7 +250,7 @@ void Dodge::paint(HDC hdc)
 
 	this->TITLE->paint(hdc);
 
-	btn_start->paint(hdc);
+	
 	this->player->paint(hdc);
 	this->time_label->paint(hdc);
 	
@@ -240,7 +265,7 @@ void Dodge::paint(HDC hdc)
 	{
 		i.paint(hdc);
 	}
-
+	btn_start->paint(hdc);
 }
 
 

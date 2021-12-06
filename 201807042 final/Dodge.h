@@ -9,6 +9,8 @@ private:
 	ULONGLONG start_time;
 	ULONGLONG enduring_time;
 	ULONGLONG best_enduring_time;
+	ULONGLONG temp_time;
+	ULONGLONG end_time;
 	TEXTBUTTON * btn_start;
 	
 	LABEL* TITLE;
