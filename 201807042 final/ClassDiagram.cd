@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BUTTON">
+  <Class Name="BUTTON" Collapsed="true">
     <Position X="2.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgEBAAAAAAABAAAAAAABAAAIABFAAAAAAAAAgAEAAQ=</HashCode>
       <FileName>BUTTON.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PLAYER">
+  <Class Name="PLAYER" Collapsed="true">
     <Position X="3.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIIgAAUAAAAAABRAIAAAACAQAQABAAAAAAAAAAA=</HashCode>
@@ -17,11 +17,11 @@
   <Class Name="OBJECT" Collapsed="true">
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAgAAAAwQQIiAIBgAAAAAAAIAAAJgiAAABIA=</HashCode>
+      <HashCode>AAAAAAgAAgAAAAwQQIiAIBgAACAAAAJAAAJgiAAABIA=</HashCode>
       <FileName>OBJECT.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LABEL">
+  <Class Name="LABEL" Collapsed="true">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAgQAAEAgBAAAAAAAAAAAACAACAAAAAIAAAACAAAAAA=</HashCode>
@@ -29,24 +29,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PAGE" Collapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>PAGE.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Dodge" Collapsed="true">
-    <Position X="5.75" Y="2.25" Width="1.5" />
+    <Position X="9.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAgAEAAAAAAACAAAAACAAAAABAAAEIAACgAE=</HashCode>
+      <HashCode>AAgAQAIAAoAEAAAAAAACAAAUECgAAAABAAAEIAACgAE=</HashCode>
       <FileName>Dodge.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TEXTBUTTON">
+  <Class Name="TEXTBUTTON" Collapsed="true">
     <Position X="1" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAgAAAAAAAAAAAAAAAAACAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>TEXTBUTTON.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BULLET">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQACAAACAAAACAAAAAAAIABAAQAQAAAAAAAAAAEAA=</HashCode>
+      <FileName>BULLET.h</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="맑은 고딕" Size="9" />

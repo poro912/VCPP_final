@@ -1,3 +1,4 @@
+#pragma once
 #include "Dodge.h"
 
 #define WM_GAME_CREATE WM_USER
@@ -220,15 +221,6 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
-	
-	case WM_PAINT:
-	{
-		//PAINTSTRUCT ps;
-		//HDC hdc = BeginPaint(hWnd, &ps);
-		//this->paint(hdc);
-		//EndPaint(hWnd, &ps);
-		break;
-	}
 	case WM_DESTROY:
 		SendMessage(hWnd, WM_GAME_OVER, 0, 0);
 		KillTimer(hWnd, KEY_SENSE);
@@ -249,16 +241,12 @@ void Dodge::paint(HDC hdc)
 	Rectangle(hdc, this->area.left, this->area.top, this->area.right, this->area.bottom);
 
 	this->TITLE->paint(hdc);
-
-	
 	this->player->paint(hdc);
 	this->time_label->paint(hdc);
 	
 	wsprintf(temp, L"ÃÑ¾Ë ¼ö : %d", (int)this->bullets.size());
 	this->bullet_label->setText(temp);
-
 	this->bullet_label->paint(hdc);
-
 	this->best_time->paint(hdc);
 
 	for (auto& i : this->bullets)

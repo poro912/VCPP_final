@@ -145,6 +145,7 @@
     <ClInclude Include="Dodge.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LABEL.h" />
+    <ClInclude Include="Mine.h" />
     <ClInclude Include="OBJECT.h" />
     <ClInclude Include="PAGE.h" />
     <ClInclude Include="PLAYER.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="BUTTON.cpp" />
     <ClCompile Include="Dodge.cpp" />
     <ClCompile Include="LABEL.cpp" />
+    <ClCompile Include="Mine.cpp" />
     <ClCompile Include="OBJECT.cpp" />
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="TEXTBUTTON.cpp" />

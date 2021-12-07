@@ -1,7 +1,7 @@
 #pragma once
 #include"PAGE.h"
 
-class Dodge : PAGE
+class Dodge : public PAGE
 {
 private:
 	PLAYER * player;

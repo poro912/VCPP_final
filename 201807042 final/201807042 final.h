@@ -4,6 +4,7 @@
 
 // 만든 게임
 #include "Dodge.h"
+#include "Mine.h"
 
 using namespace std;
 

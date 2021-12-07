@@ -13,12 +13,14 @@ public:
 		const WPARAM		wParam,
 		const LPARAM		lParam
 	) = 0;
+
 	void paint(HWND hWnd)
 	{
 		HDC hdc = GetDC(hWnd);
 		paint(hdc);
 		ReleaseDC(hWnd, hdc);
 	};
+
 	virtual void paint(
 		HDC hdc
 	) = 0;

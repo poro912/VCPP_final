@@ -25,7 +25,7 @@
     <Filter Include="소스 파일\Dodge">
       <UniqueIdentifier>{2322a9e5-6023-4428-8c1a-b7c070f2d559}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\MineSerch">
+    <Filter Include="소스 파일\MineSearch">
       <UniqueIdentifier>{28f5ccf5-30e9-4b78-9e89-ab52a63a217e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -66,6 +66,9 @@
     <ClInclude Include="BULLET.h">
       <Filter>소스 파일\moudle</Filter>
     </ClInclude>
+    <ClInclude Include="Mine.h">
+      <Filter>소스 파일\MineSearch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="201807042 final.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="BULLET.cpp">
       <Filter>소스 파일\moudle</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>소스 파일\MineSearch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

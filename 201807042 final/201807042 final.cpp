@@ -132,14 +132,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	static int page = 0;
 	static LABEL* lbl1;
 	static TEXTBUTTON* btn_dodge;
-	static TEXTBUTTON* Mine_serch;
+	static TEXTBUTTON* btn_mine;
 	static TEXTBUTTON* btn_quit;
 	static Dodge* dot;
+	static Mine* mine;
 	int ret = 0;
-		
-	if (dot != NULL) {
+
+	switch (page)
+	{
+	case 0:
+		break;
+	case 1:
 		ret = dot->proc(hWnd, message, wParam, lParam);
+		break;
+	case 2:
+		ret = mine->proc(hWnd, message, wParam, lParam);
+		break;
+	default:
+		break;
 	}
+
+
 
 	switch (message)
 	{
@@ -147,11 +160,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (dot == NULL) {
 			dot = new Dodge();
 		}
-		else
-		{
-			delete dot;
-			dot = new Dodge();
+		if (mine == NULL) {
+			mine = new Mine();
 		}
+		
 		break; 
 	case WM_LBUTTONDOWN:
 		break;
@@ -165,12 +177,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			btn_dodge->setVisible(false);
 			page = 1;
 		}
+		if (btn_mine->press_Action(hWnd, message, wParam, lParam))
+		{
+			btn_mine->setEnabled(false);
+			btn_mine->setVisible(false);
+			page = 2;
+		}
 		if (btn_quit->press_Action(hWnd, message, wParam, lParam))
 		{
-			delete dot;
-			dot = NULL;
+			//delete dot;
+			//dot = NULL;
+			PostMessage(hWnd, WM_GAME_OVER, wParam, 0);
 			btn_dodge->setEnabled(true);
 			btn_dodge->setVisible(true);
+			btn_mine->setEnabled(true);
+			btn_mine->setVisible(true);
 
 			if (page == 0)
 			{
@@ -186,6 +207,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 		case FRAME_TIMER:
 			InvalidateRect(hWnd, NULL, true);
+			break;
 		default:
 			break;
 		}
@@ -196,12 +218,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
 		lbl1 = new LABEL(250, 50, L"게임 선택",50);
 		btn_dodge = new TEXTBUTTON(L"Dodge", 1, 250, 120, 200, 50, 30);
-		btn_quit = new TEXTBUTTON(L"QUIT", 2, 250, 600, 200, 50, 30);
-		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn_dodge->setAction(create_button);
+
+		
+		btn_mine = new TEXTBUTTON(L"MINE", 2, 250, 200, 200, 50, 30);
+		btn_mine->setAction(create_button);
+
+		btn_quit = new TEXTBUTTON(L"QUIT", 0, 250, 600, 200, 50, 30);
+		//function<int(HWND,UINT,LPARAM,WPARAM)>
 		btn_quit->setAction(quit_button);
 	}
 		break;
+
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;
@@ -210,13 +238,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (page == 0)
 		{
 			btn_dodge->paint(hdc);
+			btn_mine->paint(hdc);
 			lbl1->paint(hdc);
 		}
-		
-		
-		btn_quit->paint(hdc);
-		if (dot != NULL)
+		else if(page == 1)
 			dot->paint(hdc);
+		else if(page == 2)
+			mine->paint(hdc);
+
+		btn_quit->paint(hdc);
+
 		EndPaint(hWnd, &ps);
 	}
 		break;
@@ -241,6 +272,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_DESTROY:
 		KillTimer(hWnd, 0);
+		SendMessage(hWnd, WM_GAME_OVER, 0, 0);
 		PostQuitMessage(0);
 		break;
 	default:
