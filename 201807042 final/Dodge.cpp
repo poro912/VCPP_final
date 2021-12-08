@@ -11,7 +11,7 @@
 #define BULLET_proc 3
 
 #ifndef NOW_FPS
-#define NOW_FPS 30/1000
+#define NOW_FPS 1000/144
 #endif
 
 #define START_BUTTON 100
@@ -71,10 +71,10 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		SetTimer(hWnd, KEY_SENSE, NOW_FPS, NULL);
 
 		KillTimer(hWnd, CHECK_TIME);
-		SetTimer(hWnd, CHECK_TIME, 50, NULL);
+		SetTimer(hWnd, CHECK_TIME, NOW_FPS, NULL);
 
 		KillTimer(hWnd, BULLET_proc);
-		SetTimer(hWnd, BULLET_proc, NOW_FPS * 2, NULL);
+		SetTimer(hWnd, BULLET_proc, NOW_FPS, NULL);
 
 		btn_start->setEnabled(false);
 		btn_start->setVisible(false);
@@ -108,6 +108,8 @@ int Dodge::proc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		btn_start->setEnabled(true);
 		btn_start->setVisible(true);
+
+		this->bullets.clear();
 
 		this->player->setVisible(false);
 		this->player->setLocation(300,300);

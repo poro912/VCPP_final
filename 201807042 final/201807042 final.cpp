@@ -215,7 +215,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡPAINT, COMMAND, DESTROYㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	case WM_CREATE:
 	{
-		SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
+		//SetTimer(hWnd,FRAME_TIMER,NOW_FPS,NULL);   // 30 fps
+		SetTimer(hWnd, FRAME_TIMER, NOW_FPS, NULL);
 		lbl1 = new LABEL(250, 50, L"게임 선택",50);
 		btn_dodge = new TEXTBUTTON(L"Dodge", 1, 250, 120, 200, 50, 30);
 		btn_dodge->setAction(create_button);
@@ -232,8 +233,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_PAINT:
 	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);  
+		PAINTSTRUCT ps;		// 페인트 객체
+		static HDC hdc, mem_dc;
+		static HBITMAP nBitmap, oBitmap;
+		static RECT buffer;
+		HBRUSH nBrush;
+		//static HDC hdc = BeginPaint(hWnd, &ps);  
+
+		mem_dc = BeginPaint(hWnd, &ps);			// 페인트 dc를 받는다
+		GetClientRect(hWnd, &buffer);			
+		hdc = CreateCompatibleDC(mem_dc);		// 새로운 화면 할당
+		nBitmap = CreateCompatibleBitmap(mem_dc, buffer.right, buffer.bottom);
+												// mem_dc와 호환 가능한 비트맵 생성
+		oBitmap = (HBITMAP)SelectObject(hdc, nBitmap);
+												// hdc 에 연결된 비트맵을 호환 가능한 비트맵으로 선택
+		
+		nBrush = CreateSolidBrush(WINDOW_COLOR);
+		SelectObject(hdc, nBrush);
+		PatBlt(hdc, 0, 0, buffer.right, buffer.bottom, PATCOPY);
+												// hdc(비트맵)에 흰 화면으로 출력 해당 범위만큼 출력
+		DeleteObject(nBrush);
 
 		if (page == 0)
 		{
@@ -248,6 +267,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		btn_quit->paint(hdc);
 
+		
+		GetClientRect(hWnd, &buffer);			// 현재 hWnd 크기 받기
+		BitBlt(mem_dc, 0, 0, buffer.right, buffer.bottom, hdc, 0, 0, SRCCOPY);
+												// 0,0 위치부터 
+		SelectObject(hdc, oBitmap);
+		DeleteObject(nBitmap);
+		DeleteDC(hdc);
 		EndPaint(hWnd, &ps);
 	}
 		break;
