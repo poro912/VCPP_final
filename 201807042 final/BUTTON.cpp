@@ -110,7 +110,7 @@ int BUTTON::Action(
 	const	LPARAM&		lParam
 ) {
 	if(this->enabled)
-		return action(hWnd, message, lParam, wParam);
+		return action(hWnd, message, wParam, lParam);
 }
 
 int BUTTON::press_Action(
@@ -120,7 +120,7 @@ int BUTTON::press_Action(
 	const	LPARAM& lParam
 ) {
 	if (this->press(lParam))
-		return action(hWnd, message, lParam, wParam);
+		return action(hWnd, message, wParam, lParam);
 	else
 		return 0;
 }
